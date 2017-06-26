@@ -69,7 +69,33 @@ public class quickSort {
 //		return left;
 //	}
 	
-	public static int partition(int[] array, int start, int end, int piv) {
+	public static int partition(int[] array, int start, int end, int pivot) {
+		while (start < end) {
+			while (array[start] < pivot) {
+				start++;
+			}
+			
+			while (array[end] >= pivot) {
+				end--;
+			}
+			
+			if (end < start) { //if they cross over in flight
+				return start;
+			}
+			
+			if (array[start] >= pivot && array[end] < pivot) {
+				swap(array, start, end);
+			}
+		}
+		return start;
+	}
+	
+	private static void swap(int[] array, int start, int end) {
+	// TODO Auto-generated method stub
+	
+	}
+
+	public static int partition1(int[] array, int start, int end, int piv) {
 		int left = start, right = end, pivot = array[piv]; //dynamic boiz
 		System.out.println(Arrays.toString(array));
 		
@@ -79,10 +105,11 @@ public class quickSort {
 		
 		while (left < right) {
 			
-			while(array[left] < pivot && left < array.length) {
+			while(array[left] < pivot && left < array.length && !(left+1>right)) {
 				left++;
+				
 			}
-			while(array[right] >= pivot && right > 0) {
+			while(array[right] >= pivot && right > 0 && !(right-1<left)) {
 				right--;
 			}
 			System.out.println("left: " + left + "," + "right: " + right + "," + "pivot value: " + pivot);
@@ -99,8 +126,12 @@ public class quickSort {
 				right--;
 			//} else {
 			//	System.out.println( "...NO SWAP!...");
+			} else if (right < left) { //if crossed over, return left
+				return left;
 			}
 		}
-		return left;
+		return right;
+		//left steps into right if there is a final swap
+		
 	}
 }
