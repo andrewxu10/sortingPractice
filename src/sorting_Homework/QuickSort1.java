@@ -9,11 +9,14 @@ public class QuickSort1  {
     
     public static void main(String[] args) {
     	
-    	int[] numbers = new int[8];
+    	
+    	int[] numbers = new int[100];
         Random generator = new Random();
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = generator.nextInt(20);
         }
+    	
+        //int[] numbers = {18, 6, 9, 11, 17, 6, 4, 17};
         System.out.println(Arrays.toString(numbers));
         QuickSort1 sorter = new QuickSort1();
         sorter.sort(numbers);
@@ -29,41 +32,127 @@ public class QuickSort1  {
         number = values.length;
         quicksort(0, number - 1);
     }
+    
+    private void quicksort1(int low, int high) {
+    	
+    	
+    	int i = low, j = high;
+    	int pivot = numbers[low + ((high - low)/2)];
+    	System.out.println("pivot: " + pivot);
+    	while (i <= j) {
+    		while (numbers[i] < pivot) {
+    			i++;
+    		}
+    		while (numbers[j] > pivot) {
+    			j--;
+    		}
+    		if (i <= j) {
+    			swap(i,j);
+    			i++;
+    			j--;
+    		}
+    	}
+    	System.out.println(Arrays.toString(numbers));
+    	if (j > low) {
+    		quicksort(low, j);
+    	}
+    	if (i < high) {
+    		quicksort(i, high);
+    	}
+    }
 
+    private void swap(int i, int j) {
+    	int a = numbers[j];
+    	numbers[j] = numbers[i];
+    	numbers[i] = a;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private void quicksort(int low, int high) {
-        int i = low, j = high;
-        // Get the pivot element from the middle of the list
+        int i = low, j = high;    
         int pivot = numbers[low + (high-low)/2];
 
-        // Divide into two lists
-        while (i <= j) {
-            // If the current value from the left list is smaller than the pivot
-            // element then get the next element from the left list
+        while (i <= j) {       
             while (numbers[i] < pivot) {
                 i++;
-            }
-            // If the current value from the right list is larger than the pivot
-            // element then get the next element from the right list
+            }          
             while (numbers[j] > pivot) {
                 j--;
-            }
-
-            // If we have found a value in the left list which is larger than
-            // the pivot element and if we have found a value in the right list
-            // which is smaller than the pivot element then we exchange the
-            // values.
-            // As we are done we can increase i and j
-            if (i <= j) {
+            }          
+            if (i <= j) { // = : easier to just exchange w/yourself and step++ -- so you don't have to write an exception
                 exchange(i, j);
                 i++;
                 j--;
             }
         }
-        // Recursion
-        if (low < j)
+        
+        System.out.println("Partitioned via: " + "low[" + low + "] " + "high[" + high + "] " + "pivot index[" + (low + (high-low)/2) + "] " + "pivot value[" + pivot + "] " + Arrays.toString(numbers));
+
+        
+        
+        
+			        if(j+1 != i){
+			        	//System.out.println("POSSIBLE WTF WTF WTF" + j + ", " + i);
+			        	System.out.println("placed: " + (j+1));
+			        }
+        
+        if (low >= j && low!=0) {
+        	//System.out.println("j : " +  numbers[j] + ", pivot :" + pivot);
+        	//System.out.println("but... " + "i :" + numbers[i]);
+        	System.out.println("placed: " + low);
+        	
+        }
+        if (high <= i) {
+        	//System.out.println("i :" + numbers[i] + ", pivot :" + pivot);
+        	//System.out.println("but... " + "j :" + numbers[j]);
+        	System.out.println("placed: " + high);
+        	
+        }
+        
+        if (low < j) {
+				//        	System.out.println("PT1: Recursed (" + low + ", " + j + ")");
+				//        	if(j+1 != i){
+				//            	System.out.println("FLAG1 WTF WTF WTF" + j + ", " + i);
+				//            }
+//        	System.out.println(low);
+//        	System.out.println(j);
             quicksort(low, j);
-        if (i < high)
+        }
+        	
+        if (i < high) {
+				//        	System.out.println("PT2: Recursed (" + i + ", " + high + ")");
+				//        	if(j+1 != i){
+				//            	System.out.println("FLAG2 WTF WTF WTF" + j + ", " + i);
+				//            }
+        	//System.out.println(i);
+        	//System.out.println(high);
             quicksort(i, high);
+            				//quicksort(j++, high); //experiment
+        }
+        
+			//        if(j+1 != i){
+			//        	System.out.println("END END END" + j + ", " + i);
+			//        }
+        	
     }
 
     private void exchange(int i, int j) {
