@@ -4,9 +4,45 @@ import java.util.Arrays;
 public class mergeSort {	
 	
 	public static void main(String[] args) {
-		int [] x= {8,7,5,6,2,4,3,1};
+		int [] x= {8,2,53,2,8,6,34,76};
 		int [] y= mSort(x);
 		System.out.println(Arrays.toString(y));
+	}
+	
+	public static int[] mS(int[] x){ //7.3.17 practice
+		if(x.length == 1) {
+			return x;
+		}
+		int[] a = Arrays.copyOfRange(x, 0, x.length / 2);
+		int[] b = Arrays.copyOfRange(x, x.length / 2, x.length);
+		return m(mS(a),mS(b));
+	}
+	public static int[] m(int[] a, int[] b) { //7.3.17 practice
+		int i = 0, j = 0, p = 0;
+		int[] r = new int[a.length + b.length];
+
+		while (i < a.length && j < b.length) {
+			if(a[i] < b[j]) {
+				r[p] = a[i];
+				p++; i++;
+			} else {
+				r[p] = b[j];
+				p++; j++;
+			}
+		}
+		if (j == b.length) {
+			while(p < r.length) {
+				r[p] = a[i];
+				p++; i++;
+			}
+		}
+		if (i == a.length) {
+			while(p < r.length) {
+				r[p] = b[j];
+				p++; j++;
+			}
+		}
+		return r;
 	}
 	
 	public static int[] mSort(int[] x) {

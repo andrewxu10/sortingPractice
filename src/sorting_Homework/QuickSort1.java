@@ -10,7 +10,7 @@ public class QuickSort1  {
     public static void main(String[] args) {
     	
     	
-    	int[] numbers = new int[100];
+    	int[] numbers = new int[20];
         Random generator = new Random();
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = generator.nextInt(20);
@@ -22,6 +22,58 @@ public class QuickSort1  {
         sorter.sort(numbers);
         System.out.println(Arrays.toString(numbers));
     }
+    
+    public void quickSelect(int low, int high, int k) { //find k th number (sorted)
+    	if(k < low || k > high) {
+    		return;
+    	}
+    	int i = low, j = high;
+    	int pivot = numbers[low + ((high - low) / 2)];
+    	while(i<=j) {
+    		while(numbers[i] < pivot) {
+    			i++;
+    		}
+    		while(numbers[j] > pivot) {
+    			j--;
+    		}
+    		if(i<=j) {
+    			swap(i,j);
+    			i++; j--;
+    		}
+    	}
+    	if(j > low) {
+    		quickSelect(low, j, k);
+    	}
+    	if(i < high) {
+    		quickSelect(i, high, k);
+    	}
+    }
+    
+    public void s(int low, int high) {
+    	int i = low, j = high;
+    	int pivot = numbers[low + ((high - low) / 2)];
+    	//partition
+    	while (i <= j) {
+    		while(numbers[i] < pivot) {
+    			i++;
+    		}
+    		while(numbers[j] > pivot) {
+    			j--;
+    		}
+    		if(i <= j) {
+    			swap(i,j);
+    			i++;
+    			j--;
+    		}
+    	}
+    	if (low < j){
+    		s(low, j);
+    	}
+    	if (i < high){
+    		s(i, high);
+    	}
+    	
+    }
 
     public void sort(int[] values) {
         // check for empty or null array
@@ -30,7 +82,10 @@ public class QuickSort1  {
         }
         this.numbers = values;
         number = values.length;
-        quicksort(0, number - 1);
+        quickSelect(0, number - 1, 7);
+        System.out.println("Quick Selected (7): " + Arrays.toString(numbers));
+        s(0, number - 1);
+        System.out.println("Sorted: " + Arrays.toString(numbers));
     }
     
     private void quicksort1(int low, int high) {
