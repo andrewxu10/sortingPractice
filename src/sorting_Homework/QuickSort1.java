@@ -23,6 +23,30 @@ public class QuickSort1  {
         System.out.println(Arrays.toString(numbers));
     }
     
+    
+    public void quickieSort(int low, int high) {
+    	int i = low, j = high, pivot = numbers[(high-low)/2 + low];
+    	while(i<=j){
+    		while(numbers[i]<pivot){
+    			i++;
+    		}
+    		while(numbers[j]>pivot){
+    			j--;
+    		}
+    		if(i<=j){
+    			swap(i,j);
+    			i++; j--;
+    		}
+    	}
+    	if(low<j){
+    		quickieSort(low, j);
+    	}
+    	if(i<high){
+    		quickieSort(i, high);
+    	}
+    }
+    
+    
     public void quickSelect(int low, int high, int k) { //find k th number (sorted)
     	if(k < low || k > high) {
     		return;
@@ -84,7 +108,7 @@ public class QuickSort1  {
         number = values.length;
         quickSelect(0, number - 1, 7);
         System.out.println("Quick Selected (7): " + Arrays.toString(numbers));
-        s(0, number - 1);
+        quickieSort(0, number - 1);
         System.out.println("Sorted: " + Arrays.toString(numbers));
     }
     
