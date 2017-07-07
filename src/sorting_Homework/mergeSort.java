@@ -1,12 +1,61 @@
 package sorting_Homework;
 import java.util.Arrays;
+import java.util.Random;
 
 public class mergeSort {	
 	
 	public static void main(String[] args) {
 		int [] x= {8,2,53,2,8,6,34,76};
-		int [] y= mergeySort(x);
-		System.out.println(Arrays.toString(y));
+		int [] a= {8,2,53,2,8,6,34,76};
+		
+		int[] numbers = new int[20];
+        Random generator = new Random();
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = generator.nextInt(20);
+        }
+        System.out.println(Arrays.toString(numbers));
+        
+        
+		//int [] y= mergeySort(x);
+		
+		int [] axu = quickSort(numbers, 0, 19);
+		
+		System.out.println(Arrays.toString(axu));
+		
+		//System.out.println(Arrays.toString(y));
+		
+	}
+	
+	public static int[] quickSort(int[] input, int start, int end) {
+		int a = start, b = end, pivot = input[(end - start) / 2+start];
+		//System.out.println("pivot value: " + pivot + " pivot index: " + ((end - start)/2 +a)) ;
+		while(a<=b) {
+			while(input[a] < pivot) {
+				a++;
+			}
+			while(input[b] > pivot) {
+				b--;
+			}
+			if(a<=b) {
+				swap(input, a,b);
+				a++; b--;
+			}
+		}
+		if(start < b){ // && pivot > input.length - k 
+			//System.out.println("start: " + start);
+			quickSort(input, start, b);
+		}
+		if(a < end){ // && end >= input.length - k 
+			//System.out.println("a: " + a);
+			quickSort(input, a, end);
+		}
+		return input;
+	}
+	
+	public static void swap(int[] input, int a, int b){
+		int z = input[a];
+		input[a] = input[b];
+		input[b] = z;
 	}
 	public static int[] mergeySort(int[] x) {
 		if(x.length == 1) {
@@ -39,28 +88,6 @@ public class mergeSort {
 		}
 		return ret;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public static int[] mS(int[] x){ //7.3.17 practice
 		if(x.length == 1) {

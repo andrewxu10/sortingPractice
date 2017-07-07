@@ -9,42 +9,60 @@ public class QuickSort1  {
     
     public static void main(String[] args) {
     	
-    	
     	int[] numbers = new int[20];
         Random generator = new Random();
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = generator.nextInt(20);
         }
-    	
-        //int[] numbers = {18, 6, 9, 11, 17, 6, 4, 17};
-        System.out.println(Arrays.toString(numbers));
+        System.out.println("Numbers unsorted: " + Arrays.toString(numbers));
         QuickSort1 sorter = new QuickSort1();
+        
         sorter.sort(numbers);
-        System.out.println(Arrays.toString(numbers));
+        //System.out.println(Arrays.toString(numbers));
     }
     
+
     
-    public void quickieSort(int low, int high) {
-    	int i = low, j = high, pivot = numbers[(high-low)/2 + low];
-    	while(i<=j){
-    		while(numbers[i]<pivot){
-    			i++;
-    		}
-    		while(numbers[j]>pivot){
-    			j--;
-    		}
-    		if(i<=j){
-    			swap(i,j);
-    			i++; j--;
-    		}
+	public void quickieSortSelect(int start, int end, int k) { // really quickselect
+		int a = start, b = end, pivot = numbers[(end - start) / 2+start];
+		//System.out.println("pivot value: " + pivot + " pivot index: " + ((end - start)/2 +a)) ;
+		
+		if(k < start || k > end) {
+    		return;
     	}
-    	if(low<j){
-    		quickieSort(low, j);
-    	}
-    	if(i<high){
-    		quickieSort(i, high);
-    	}
-    }
+		
+		while(a<=b) {
+			while(numbers[a] < pivot) {
+				a++;
+			}
+			while(numbers[b] > pivot) {
+				b--;
+			}
+			if(a<=b) {
+				swap(a,b);
+				a++; b--;
+			}
+		}
+//		if(start >= b && start == k) {
+//			System.out.println("start: " + numbers[start]);
+//		}
+//		if(a >= end && start == k) {
+//			System.out.println("end: " + numbers[end]);
+//		}
+		if(k >= b && k <= a){
+			System.out.println("middle: " + numbers[k] + ", index: " + k);
+
+		}
+		if(start < b){ // && pivot > input.length - k 
+			//System.out.println("start: " + start);
+			quickieSortSelect(start, b, k);
+		}
+		if(a < end){ // && end >= input.length - k 
+			//System.out.println("a: " + a);
+			quickieSortSelect(a, end, k);
+		}
+
+	}
     
     
     public void quickSelect(int low, int high, int k) { //find k th number (sorted)
@@ -72,32 +90,6 @@ public class QuickSort1  {
     		quickSelect(i, high, k);
     	}
     }
-    
-    public void s(int low, int high) {
-    	int i = low, j = high;
-    	int pivot = numbers[low + ((high - low) / 2)];
-    	//partition
-    	while (i <= j) {
-    		while(numbers[i] < pivot) {
-    			i++;
-    		}
-    		while(numbers[j] > pivot) {
-    			j--;
-    		}
-    		if(i <= j) {
-    			swap(i,j);
-    			i++;
-    			j--;
-    		}
-    	}
-    	if (low < j){
-    		s(low, j);
-    	}
-    	if (i < high){
-    		s(i, high);
-    	}
-    	
-    }
 
     public void sort(int[] values) {
         // check for empty or null array
@@ -106,39 +98,17 @@ public class QuickSort1  {
         }
         this.numbers = values;
         number = values.length;
-        quickSelect(0, number - 1, 7);
-        System.out.println("Quick Selected (7): " + Arrays.toString(numbers));
-        quickieSort(0, number - 1);
+        
+//        quickSelect(0, number - 1, 7);
+//        System.out.println("Quick Selected (7): " + Arrays.toString(numbers));
+        
+        Random rand = new Random();
+        int  n = rand.nextInt(20);
+        
+        quickieSortSelect(0, number - 1, n);
         System.out.println("Sorted: " + Arrays.toString(numbers));
     }
-    
-    private void quicksort1(int low, int high) {
-    	
-    	
-    	int i = low, j = high;
-    	int pivot = numbers[low + ((high - low)/2)];
-    	System.out.println("pivot: " + pivot);
-    	while (i <= j) {
-    		while (numbers[i] < pivot) {
-    			i++;
-    		}
-    		while (numbers[j] > pivot) {
-    			j--;
-    		}
-    		if (i <= j) {
-    			swap(i,j);
-    			i++;
-    			j--;
-    		}
-    	}
-    	System.out.println(Arrays.toString(numbers));
-    	if (j > low) {
-    		quicksort(low, j);
-    	}
-    	if (i < high) {
-    		quicksort(i, high);
-    	}
-    }
+
 
     private void swap(int i, int j) {
     	int a = numbers[j];
@@ -146,25 +116,7 @@ public class QuickSort1  {
     	numbers[i] = a;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //////////////////////////////////////////quicksort debug version below
     
     private void quicksort(int low, int high) {
         int i = low, j = high;    
