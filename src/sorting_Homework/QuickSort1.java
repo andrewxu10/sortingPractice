@@ -21,7 +21,85 @@ public class QuickSort1  {
         //System.out.println(Arrays.toString(numbers));
     }
     
-
+    
+//    public void qS (int start, int end) {
+//    	int i = start, j =end, pivot = numbers[(end - start)/2 + start];
+//    	while (i <= j) {
+//    		while(numbers[i] < pivot) {
+//    			i++;
+//    		}
+//    		while(numbers[j] > pivot) {
+//    			j--;
+//    		}
+//    		if(i <= j) {
+//    			s(i,j);
+//    			i++; j--;
+//    		}
+//    	}
+//    	if(start < j) {
+//    		qS(start, j);
+//    	}
+//    	if(i < end) {
+//    		qS(i, end);
+//    	}
+//    }
+//    
+//    public void s (int a, int b) {
+//    	int temp = numbers[a];
+//    	numbers[a] = numbers[b];
+//    	numbers[b] = temp;
+//    }
+//    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    public void qS(int start, int end) {
+//    	int a = start, b = end, c = 0;
+//    	int pivot = numbers[(end - start) + start];
+//    	
+//    	while (a <= b) {
+//    		while (numbers[a] < pivot) {
+//    			a++;
+//    		}
+//    		while (numbers[b] > pivot) {
+//    			b--;
+//    		}
+//    		if (a<=b) {
+//    			swap(a,b);
+//    			a++; b--;
+//    		}
+//    	}
+//    	if(start < b) {
+//    		qS(start, b);
+//    	}
+//    	if(a < end) {
+//    		qS(a, end);
+//    	}
+//    }
     
 	public void quickieSortSelect(int start, int end, int k) { // really quickselect
 		int a = start, b = end, pivot = numbers[(end - start) / 2+start];
@@ -105,7 +183,7 @@ public class QuickSort1  {
         Random rand = new Random();
         int  n = rand.nextInt(20);
         
-        quickieSortSelect(0, number - 1, n);
+        qS(0, number - 1);
         System.out.println("Sorted: " + Arrays.toString(numbers));
     }
 

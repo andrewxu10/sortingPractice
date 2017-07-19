@@ -18,12 +18,49 @@ public class mergeSort {
         
 		//int [] y= mergeySort(x);
 		
-		int [] axu = quickSort(numbers, 0, 19);
+		int [] axu = mergeSortt(numbers);
 		
 		System.out.println(Arrays.toString(axu));
 		
 		//System.out.println(Arrays.toString(y));
 		
+	}
+	
+	public static int[] mergeSortt(int[] array) {
+		if(array.length == 1) {
+			return array;
+		}
+		int[] a = Arrays.copyOfRange(array, 0, array.length / 2);
+		int[] b = Arrays.copyOfRange(array, array.length / 2, array.length);	
+		return mergee(mergeSortt(a), mergeSortt(b));
+	}
+	
+	public static int[] mergee(int[] a, int[] b) {
+		int i = 0, j = 0, p = 0;
+		int[] z = new int[a.length + b.length];
+		while(i < a.length && j < b.length) {
+			if(a[i] < b[j]) {
+				z[p] = a[i];
+				p++; i++;
+			}
+			else  { //(b[j] < a[i])
+				z[p] = b[j];
+				p++; j++;
+			}
+		}
+		if(i == a.length) {
+			while(j < b.length) {
+				z[p] = b[j];
+				p++; j++;
+			}
+		}
+		if(j == b.length) {
+			while(i < a.length) {
+				z[p] = a[i];
+				p++; i++;
+			}
+		}
+		return z;
 	}
 	
 	public static int[] quickSort(int[] input, int start, int end) {

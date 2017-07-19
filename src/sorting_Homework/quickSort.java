@@ -15,6 +15,8 @@ public class quickSort {
 		//System.out.println(a);
 
 	}
+	
+
 
 	public static void qSort(int[] array, int start, int end) {
 		if(end - start == 0){
